@@ -14,21 +14,24 @@
 // ESM
 import Fastify from 'fastify'
 
-const fastify = Fastify({
+const server = Fastify({
   logger: true
 })
 
 
 // Declare a route
-fastify.get('/', function (request, reply) {
+server.get('/', function (request, reply) {
   reply.send(console.log('Thais'))
 })
-fastify.get('/Home', function (request, reply) {
-  reply.send(console.log('Home'))
+server.post('/video', function (request, reply) {
+  reply.send({nome: "Thais"})
 })
 
+server.put('/videos/:id',()=>{
+  return 'Hello World'
+})
 // Run the server!
-fastify.listen({ port: 3333 }, function (err, address) {
+server.listen({ port: 3333 }, function (err, address) {
   if (err) {
     fastify.log.error(err)
     process.exit(1)
