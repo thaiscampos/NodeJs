@@ -35,8 +35,10 @@ server.post("/videos", function (request, reply) {
 });
 
 // Declare a route
-server.get("/videos", (request, reply) => {
-  const videos = db.list();
+server.get("/videos", (request) => {
+  const search = request.query.search;
+
+  const videos = db.list(search);
   console.log(videos);
   return videos;
 });
