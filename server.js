@@ -13,6 +13,7 @@
 // ESM
 import Fastify from "fastify";
 import { DatabaseMemory } from "./database-memory.js";
+import { DatabasePostgres } from "./database-postgres.js";
 
 const server = Fastify({
   logger: true,
@@ -20,12 +21,12 @@ const server = Fastify({
 
 //Request Body
 
-const db = new DatabaseMemory();
+const db = new DatabasePostgres();
 //rest client - Extensao
-server.post("/videos", function (request, reply) {
+server.post("/videos", async function (request, reply) {
   const { titulo, descricao, duracao } = request.body;
 
-  db.create({
+  await db.create({
     titulo: titulo,
     descricao: descricao,
     duracao: duracao,
@@ -43,25 +44,25 @@ server.get("/videos", (request) => {
   return videos;
 });
 
-server.put("/videos/:id", (request, reply) => {
+server.put("/videos/:id", async (request, reply) => {
   const videoId = request.params.id;
   const { titulo, descricao, duracao } = request.body;
-  db.update(videoId, {
+  await db.update(videoId, {
     titulo,
     descricao,
     duracao,
   });
   return reply.status(204).send();
 });
-
-server.delete("/videos/:id", (request, reply) => {
+///deletar video
+server.delete("/videos/:id", async (request, reply) => {
   const videoId = request.params.id;
-  db.delete(videoId);
+  await db.delete(videoId);
 
   return reply.status(204).send();
 });
 // Run the server!
-server.listen({ port: 3333 }, function (err, address) {
+server.listen({ port: process.env.PORT ?? 3333 }, function (err, address) {
   if (err) {
     fastify.log.error(err);
     process.exit(1);
