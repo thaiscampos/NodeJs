@@ -13,7 +13,7 @@ GET http://localhost:3333/videos
 
 ###
 
-PUT http://localhost:3333/videos/964172f8-0bc0-470f-8728-65e8546db2c8
+PUT http://localhost:3333/videos/5fb99910-0b09-4457-b3c8-80009ac680b0
 Content-Type: application/json
 
 {

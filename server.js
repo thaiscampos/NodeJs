@@ -52,8 +52,11 @@ server.put("/videos/:id", (request, reply) => {
   return reply.status(204).send();
 });
 
-server.delete("/videos/:id", () => {
-  return "Hello";
+server.delete("/videos/:id", (request, reply) => {
+  const videoId = request.params.id;
+  db.delete(videoId);
+
+  return reply.status(204).send();
 });
 // Run the server!
 server.listen({ port: 3333 }, function (err, address) {
