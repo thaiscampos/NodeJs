@@ -29,3 +29,22 @@ DELETE http://localhost:3333/videos/0c356f97-4daa-4eca-81db-9026ff3fb48a
 ###
 
 GET http://localhost:3333/videos?search=node
+
+### Site do Render
+POST https://nodejs-jl1c.onrender.com/videos
+Content-Type: application/json
+
+{
+    "titulo":"Video Node",
+    "descricao": "primeiro video",
+    "duracao":180
+}
+
+### 
+
+GET https://nodejs-jl1c.onrender.com/videos
+
+
+###
+
+DELETE https://nodejs-jl1c.onrender.com/videos/0c356f97-4daa-4eca-81db-9026ff3fb48a
